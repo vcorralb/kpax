@@ -25,6 +25,9 @@ public class Game implements Serializable {
 	private String privateKey;
 	private int idCategory;
 	private Date creationDate;
+	private int idPlatform;
+	private int idSkill;
+	private int minimumAge;
 
 	@Id
 	@Column(name = "idGame")
@@ -88,5 +91,32 @@ public class Game implements Serializable {
 
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	
+	@Column(name = "idPlatform", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
+	public int getIdPlatform() {
+		return idPlatform;
+	}
+
+	public void setIdPlatform(int idPlatform) {
+		this.idPlatform = idPlatform;
+	}
+	
+	@Column(name = "idSkill", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
+	public int getIdSkill() {
+		return idSkill;
+	}
+
+	public void setIdSkill(int idSkill) {
+		this.idSkill = idSkill;
+	}
+	
+	@Column(name = "minimumAge", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
+	public int getMinimumAge() {
+		return minimumAge;
+	}
+
+	public void setMinimumAge(int minimumAge) {
+		this.minimumAge = minimumAge;
 	}
 }

@@ -201,6 +201,15 @@ public class GameBOImp implements GameBO {
 		return objGame;
 	}
 
+	@Override
+	public List<Game> listGamesSearch(String campusSession, String text) {
+		if (sBo.validateSession(campusSession) != null) {
+			return gDao.getGamesSearch(text);
+		}
+
+		return null;
+	}
+	
 	public void setgDao(GameDao gDao) {
 		this.gDao = gDao;
 	}

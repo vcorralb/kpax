@@ -13,4 +13,5 @@ public interface GameDao {
 	public void addGame(Game objGame);
 	public void delGame(Game objGame);
 	public List<Game> getUserGames(String username);
+	public List<Game> getGamesSearch(String text);
 }

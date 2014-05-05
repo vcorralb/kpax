@@ -5,6 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -22,6 +25,8 @@ import uoc.edu.svrKpax.bussines.GameInstanceBO;
 import uoc.edu.svrKpax.bussines.GameLikeBO;
 import uoc.edu.svrKpax.bussines.GameScoreBO;
 import uoc.edu.svrKpax.bussines.TagBO;
+import uoc.edu.svrKpax.bussines.PlatformBO;
+import uoc.edu.svrKpax.bussines.SkillBO;
 import uoc.edu.svrKpax.util.AES;
 import uoc.edu.svrKpax.vo.Category;
 import uoc.edu.svrKpax.vo.Comment;
@@ -29,6 +34,8 @@ import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.GameLike;
 import uoc.edu.svrKpax.vo.Score;
 import uoc.edu.svrKpax.vo.Tag;
+import uoc.edu.svrKpax.vo.Platform;
+import uoc.edu.svrKpax.vo.Skill;
 
 import com.sun.jersey.spi.inject.Inject;
 
@@ -50,6 +57,10 @@ public class Games {
 	private TagBO tagBo;
 	@Inject
 	private CommentBO comBo;
+	@Inject
+	private PlatformBO platBo;
+	@Inject
+	private SkillBO skillBo;
 	
 
 	/* GAMES */
@@ -120,6 +131,15 @@ public class Games {
 		if(gBo.delGame(campusSession, Integer.parseInt(idGame)))return "OK";
 		else
 			return "ERROR";
+	}
+
+	@GET
+	@Path("/{session}/list/{text}")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public List<Game> getGamesSearch(@PathParam("session") String campusSession, @PathParam("text") String text) throws UnsupportedEncodingException {
+		text = URLDecoder.decode(text, "UTF-8");
+		return gBo.listGamesSearch(campusSession, text);
 	}
 	
 	/* categories */
@@ -255,7 +275,35 @@ public class Games {
 		return scBo.listScoreGames(uidGame);
 	}
 	
-
+	/* platforms */
+	@GET
+	@Path("/platform/{param}/list")
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public List<Platform> getPlatforms(@PathParam("param") String campusSession){
+		return platBo.listPlatforms(campusSession);
+	}
+	
+	@GET
+	@Path("/platform/{param}/get/{id}")
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public Platform getPlatform(@PathParam("param") String campusSession, @PathParam("id") int idPlatform){
+		return platBo.getPlatform(campusSession, idPlatform);
+	}
+	
+	/* skills */
+	@GET
+	@Path("/skill/{param}/list")
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public List<Skill> getSkills(@PathParam("param") String campusSession){
+		return skillBo.listSkills(campusSession);
+	}
+	
+	@GET
+	@Path("/skill/{param}/get/{id}")
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public Skill getSkill(@PathParam("param") String campusSession, @PathParam("id") int idSkill){
+		return skillBo.getSkill(campusSession, idSkill);
+	}
 	
 	
 	

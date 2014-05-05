@@ -72,6 +72,14 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="platDao" class="uoc.edu.svrKpax.dao.PlatformDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
+	<bean id="skillDao" class="uoc.edu.svrKpax.dao.SkillDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	
 	<!-- END GAME -->
 	<!-- END DAOS -->
 
@@ -133,6 +141,16 @@
 		<property name="sBo" ref="sBo" />
 		<property name="comDao" ref="comDao" />
 		<property name="gDao" ref="gDao" />
+	</bean>
+	
+	<bean id="platBo" class="uoc.edu.svrKpax.bussines.PlatformBOImp">
+		<property name="sBo" ref="sBo" />
+		<property name="platDao" ref="platDao" />
+	</bean>
+	
+	<bean id="skillBo" class="uoc.edu.svrKpax.bussines.SkillBOImp">
+		<property name="sBo" ref="sBo" />
+		<property name="skillDao" ref="skillDao" />
 	</bean>
 	<!-- END GAME -->
 	<!-- END BUSSINES -->

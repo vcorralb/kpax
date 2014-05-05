@@ -2,6 +2,9 @@ package uoc.edu.svrKpax.rest;
 
 import java.util.List;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -22,6 +25,8 @@ import uoc.edu.svrKpax.bussines.GameInstanceBO;
 import uoc.edu.svrKpax.bussines.GameLikeBO;
 import uoc.edu.svrKpax.bussines.GameScoreBO;
 import uoc.edu.svrKpax.bussines.TagBO;
+import uoc.edu.svrKpax.bussines.PlatformBO;
+import uoc.edu.svrKpax.bussines.SkillBO;
 
 import com.sun.jersey.api.json.JSONWithPadding;
 import com.sun.jersey.spi.inject.Inject;
@@ -44,6 +49,11 @@ public class Jsonp {
 	private TagBO tagBo;
 	@Inject
 	private CommentBO comBo;
+	@Inject
+	private PlatformBO platBo;
+	@Inject
+	private SkillBO skillBo;
+
 	
 	/* GAMES */
 	/*@GET
@@ -70,6 +80,15 @@ public class Jsonp {
 	@Produces("application/x-javascript")
 	public JSONWithPadding getGameJsonp(@PathParam("id") String idGame,@PathParam("param") String secretSession,@QueryParam("jsoncallback") String callback){
 		return new JSONWithPadding(gBo.getGame(idGame,secretSession),callback);
+	}
+
+	@GET
+	@Path("game/{session}/list/{text}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces("application/x-javascript")
+	public JSONWithPadding getGamesSearchJsonp(@PathParam("session") String campusSession, @PathParam("text") String text,  @QueryParam("jsoncallback") String callback) throws UnsupportedEncodingException {	
+		text = URLDecoder.decode(text, "UTF-8");
+		return new JSONWithPadding(gBo.listGamesSearch(campusSession, text), callback);
 	}
 	
 	/* categories */
@@ -175,6 +194,39 @@ public class Jsonp {
 		return new JSONWithPadding(scBo.listScoreGames(uidGame),callback);
 	}
 	
+	/* platforms */
+	@GET
+	@Path("/platform/{param}/list")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces("application/x-javascript")
+	public JSONWithPadding getPlatformsJsonp (@PathParam("param") String campusSession, @QueryParam("jsoncallback") String callback){
+		return new JSONWithPadding(platBo.listPlatforms(campusSession), callback);
+	}
+	
+	@GET
+	@Path("/platform/{param}/get/{id}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces("application/x-javascript")
+	public JSONWithPadding getPlatformJsonp(@PathParam("param") String campusSession, @PathParam("id") int idPlatform, @QueryParam("jsoncallback") String callback){	
+		return new JSONWithPadding(platBo.getPlatform(campusSession, idPlatform),callback);
+	}
+	
+	/* skills */
+	@GET
+	@Path("/skill/{param}/list")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces("application/x-javascript")
+	public JSONWithPadding getskillsJsonp (@PathParam("param") String campusSession, @QueryParam("jsoncallback") String callback){
+		return new JSONWithPadding(skillBo.listSkills(campusSession), callback);
+	}
+	
+	@GET
+	@Path("/skills/{param}/get/{id}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces("application/x-javascript")
+	public JSONWithPadding getskillJsonp(@PathParam("param") String campusSession, @PathParam("id") int idSkill, @QueryParam("jsoncallback") String callback){	
+		return new JSONWithPadding(skillBo.getSkill(campusSession, idSkill),callback);
+	}
 	
 	public void setgBo(GameBO gBo) {
 		this.gBo = gBo;
