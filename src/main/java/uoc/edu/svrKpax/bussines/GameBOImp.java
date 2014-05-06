@@ -135,7 +135,7 @@ public class GameBOImp implements GameBO {
 	}
 
 	@Override
-	public Boolean addGame(String campusSession, String nameGame, int idGame, int idCategory, Date creationDate) {
+	public Boolean addGame(String campusSession, String nameGame, int idGame, int idCategory, Date dateCreation) {
 		try {
 			//Add the game if user exists, game does not exists, there is a name, there is a creation date and category exists
 			if (sBo.validateSession(campusSession) != null &&
@@ -151,7 +151,7 @@ public class GameBOImp implements GameBO {
 				objGame.setSecretGame(Security.getIdGame());
 				objGame.setPrivateKey(Security.getIdSession());
 				objGame.setIdCategory(idCategory);
-				objGame.setCreationDate(creationDate);
+				objGame.setDateCreation(dateCreation);
 				
 				gDao.addGame(objGame);
 			}

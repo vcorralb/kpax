@@ -49,7 +49,7 @@ public class GameViewDaoImpl extends HibernateDaoSupport implements GameViewDao 
 				orderBy = " order by gv.popularity desc";
 				break;
 			case 3: // Most newfangled.
-				orderBy = " order by gv.creationDate desc ";
+				orderBy = " order by gv.dateCreation desc ";
 				break;
 			case 4: // Most commented.
 				orderBy = " order by gv.timesCommented desc";

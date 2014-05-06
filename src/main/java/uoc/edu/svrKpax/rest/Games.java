@@ -104,12 +104,12 @@ public class Games {
 
 	@POST
 	@Path("/add")
-	public String addGame(@FormParam("secretSession") String campusSession,@FormParam("name") String nameGame,@FormParam("idGame") String idGame, @FormParam("idCategory") String idCategory, @FormParam("creationDate") String creationDate ){
+	public String addGame(@FormParam("secretSession") String campusSession,@FormParam("name") String nameGame,@FormParam("idGame") String idGame, @FormParam("idCategory") String idCategory, @FormParam("dateCreation") String dateCreation ){
 		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 		sdf.setLenient(false);
 		try
 		{
-			if(gBo.addGame(campusSession, nameGame,Integer.parseInt(idGame), Integer.parseInt(idCategory), sdf.parse(creationDate))){
+			if(gBo.addGame(campusSession, nameGame,Integer.parseInt(idGame), Integer.parseInt(idCategory), sdf.parse(dateCreation))){
 				return "OK";
 			}
 		}

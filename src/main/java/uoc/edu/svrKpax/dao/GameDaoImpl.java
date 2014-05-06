@@ -75,8 +75,7 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 		String wCategory = text.split("#_#")[1];
 		String wPlatform = text.split("#_#")[2];
 		String wSkill = text.split("#_#")[3];
-		String wMinimumAge = text.split("#_#")[4];
-		String wSort = text.split("#_#")[5];
+		String wSort = text.split("#_#")[4];
 				
 		List<Game> list = new ArrayList<Game>();
 		
@@ -88,8 +87,6 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 			criteria.add(Restrictions.eq("idPlatform", new Integer(wPlatform)));
 		if(!"0".equals(wSkill))
 			criteria.add(Restrictions.eq("idSkill", new Integer(wSkill)));
-		if(wMinimumAge.trim().length() > 0)
-			criteria.add(Restrictions.eq("minimumAge", new Integer(wMinimumAge)));
 		
 		if("1".equals(wSort)) {
 			criteria.addOrder(Order.asc("name"));
@@ -102,9 +99,6 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 		}
 		else if("4".equals(wSort)) {
 			criteria.addOrder(Order.asc("idSkill"));
-		}
-		else if("5".equals(wSort)) {
-			criteria.addOrder(Order.asc("minimumAge"));
 		}
 		
 		list = criteria.list();

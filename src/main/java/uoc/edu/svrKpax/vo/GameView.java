@@ -24,7 +24,7 @@ public class GameView implements Serializable {
 	private String secretGame;
 	private String privateKey;
 	private int idCategory;
-	private Date creationDate;
+	private Date dateCreation;
 	private int timesCommented;
 	private int popularity;
 	private int timesPlayed;
@@ -85,13 +85,13 @@ public class GameView implements Serializable {
 		this.idCategory = idCategory;
 	}
 
-	@Column(name = "creationDate", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
-	public Date getCreationDate() {
-		return creationDate;
+	@Column(name = "dateCreation", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
+	public Date getDateCreation() {
+		return dateCreation;
 	}
 
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
+	public void setDateCreation(Date dateCreation) {
+		this.dateCreation = dateCreation;
 	}
 	
 	@Column(name = "timesCommented")
@@ -129,7 +129,7 @@ public class GameView implements Serializable {
 	public static Game getGame(GameView gameView)
 	{
 		Game game = new Game();
-		game.setCreationDate(gameView.creationDate);
+		game.setDateCreation(gameView.dateCreation);
 		game.setIdCategory(gameView.idCategory);
 		game.setIdGame(gameView.idGame);
 		game.setName(gameView.name);
