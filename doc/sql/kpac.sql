@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 06-05-2014 a las 01:25:52
+-- Tiempo de generación: 06-05-2014 a las 17:22:36
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.3.13
 
@@ -32,17 +32,6 @@ CREATE TABLE IF NOT EXISTS `ability` (
   PRIMARY KEY (`idAbility`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
---
--- Volcado de datos para la tabla `ability`
---
-
-INSERT INTO `ability` (`idAbility`, `nameAbility`) VALUES
-(1, 'Generics'),
-(2, 'Siences'),
-(3, 'History'),
-(4, 'Humanities'),
-(5, 'Languages');
-
 -- --------------------------------------------------------
 
 --
@@ -57,35 +46,6 @@ CREATE TABLE IF NOT EXISTS `abilityproficiency` (
   KEY `Ability` (`idAbility`),
   KEY `Proficiency` (`idProficiency`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
-
---
--- Volcado de datos para la tabla `abilityproficiency`
---
-
-INSERT INTO `abilityproficiency` (`idAbilityProficiency`, `idAbility`, `idProficiency`) VALUES
-(1, 1, 21),
-(2, 1, 22),
-(3, 1, 23),
-(4, 2, 1),
-(5, 2, 2),
-(6, 2, 3),
-(7, 2, 4),
-(8, 3, 16),
-(9, 3, 17),
-(10, 3, 18),
-(11, 3, 19),
-(12, 3, 20),
-(13, 4, 12),
-(14, 4, 13),
-(15, 4, 14),
-(16, 4, 15),
-(17, 5, 5),
-(18, 5, 6),
-(19, 5, 7),
-(20, 5, 8),
-(21, 5, 9),
-(22, 5, 10),
-(23, 5, 11);
 
 -- --------------------------------------------------------
 
@@ -109,36 +69,6 @@ CREATE TABLE IF NOT EXISTS `award` (
 --
 
 INSERT INTO `award` (`idAward`, `idProficiency`, `maxLevel`, `idGame`, `descripAward`) VALUES
-(1, 1, 4, 67, 'Award 1'),
-(2, 2, 3, 67, 'Award 2'),
-(3, 3, 3, 67, 'Award 3'),
-(4, 4, 4, 67, 'Award 4'),
-(5, 5, 3, 68, 'Award 5'),
-(6, 6, 3, 68, 'Award 6'),
-(7, 7, 4, 68, 'Award 7'),
-(8, 8, 3, 68, 'Award 8'),
-(9, 9, 4, 68, 'Award 9'),
-(10, 10, 4, 69, 'Award 10'),
-(11, 11, 3, 69, 'Award 11'),
-(12, 12, 3, 69, 'Award 12'),
-(13, 13, 4, 69, 'Award 13'),
-(14, 14, 3, 87, 'Award 14'),
-(15, 15, 4, 87, 'Award 15'),
-(16, 16, 3, 87, 'Award 16'),
-(17, 17, 3, 87, 'Award 17'),
-(18, 18, 4, 87, 'Award 18'),
-(19, 19, 4, 88, 'Award 19'),
-(20, 20, 3, 88, 'Award 20'),
-(21, 21, 3, 88, 'Award 21'),
-(22, 22, 3, 88, 'Award 22'),
-(23, 23, 4, 89, 'Award 23'),
-(24, 1, 4, 89, 'Award 24'),
-(25, 2, 4, 89, 'Award 25'),
-(26, 3, 3, 89, 'Award 26'),
-(27, 4, 4, 89, 'Award 27'),
-(28, 5, 3, 90, 'Award 28'),
-(29, 6, 4, 90, 'Award 29'),
-(30, 7, 3, 90, 'Award 30'),
 (31, 8, 3, 90, 'Award 31'),
 (32, 9, 4, 91, 'Award 32'),
 (33, 10, 4, 91, 'Award 33'),
@@ -176,36 +106,6 @@ CREATE TABLE IF NOT EXISTS `awardimage` (
 --
 
 INSERT INTO `awardimage` (`idAwardImage`, `idAward`, `levelAward`, `imageAward`) VALUES
-(1, 1, 1, 'A01L1.GIF'),
-(2, 1, 2, 'A01L2.GIF'),
-(3, 1, 3, 'A01L3.GIF'),
-(4, 1, 4, 'A01L4.GIF'),
-(5, 2, 1, 'A02L1.GIF'),
-(6, 2, 2, 'A02L2.GIF'),
-(7, 2, 3, 'A02L3.GIF'),
-(8, 3, 1, 'A03L1.GIF'),
-(9, 3, 2, 'A03L2.GIF'),
-(10, 3, 3, 'A03L3.GIF'),
-(11, 4, 1, 'A04L1.GIF'),
-(12, 4, 2, 'A04L2.GIF'),
-(13, 4, 3, 'A04L3.GIF'),
-(14, 4, 4, 'A04L4.GIF'),
-(15, 5, 1, 'A05L1.GIF'),
-(16, 5, 2, 'A05L2.GIF'),
-(17, 5, 3, 'A05L3.GIF'),
-(18, 6, 1, 'A06L1.GIF'),
-(19, 6, 2, 'A06L2.GIF'),
-(20, 6, 3, 'A06L3.GIF'),
-(21, 7, 1, 'A07L1.GIF'),
-(22, 7, 2, 'A07L2.GIF'),
-(23, 7, 3, 'A07L3.GIF'),
-(24, 7, 4, 'A07L4.GIF'),
-(25, 8, 1, 'A08L1.GIF'),
-(26, 8, 2, 'A08L2.GIF'),
-(27, 8, 3, 'A08L3.GIF'),
-(28, 9, 1, 'A09L1.GIF'),
-(29, 9, 2, 'A09L2.GIF'),
-(30, 9, 3, 'A09L3.GIF'),
 (31, 9, 4, 'A09L4.GIF'),
 (32, 10, 1, 'A10L1.GIF'),
 (33, 10, 2, 'A10L2.GIF'),
@@ -350,17 +250,6 @@ CREATE TABLE IF NOT EXISTS `badge` (
   PRIMARY KEY (`idBadge`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
---
--- Volcado de datos para la tabla `badge`
---
-
-INSERT INTO `badge` (`idBadge`, `nameBadge`, `descripBadge`, `imageBadge`) VALUES
-(1, 'PREMI A LA DEDICACIÓ', 'És un premi al jugador que ha fet més de 200 partides en una setmana', 'BADGE01.GIF'),
-(2, 'PREMI A LA VARIETAT', 'És un premi al jugador que ha participat en 20 jocs en una setmana', 'BADGE02.GIF'),
-(3, 'PREMI A LA CONSTÀNCIA EN UN JOC', 'És un premi al jugador que ha jugat 50 partides del mateix joc en un mateix dia', 'BADGE03.GIF'),
-(4, 'PREMI A LA PERSISTÈNCIA', 'És un premi al jugador que ha fet més de 100 partides en un dia', 'BADGE04.GIF'),
-(5, 'PREMI A LA GRAN VARIETAT', 'És un premi al jugador que ha participat en 20 jocs en un sol dia', 'BADGE05.GIF');
-
 -- --------------------------------------------------------
 
 --
@@ -395,7 +284,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `idGame` int(11) NOT NULL,
   `idUser` int(11) NOT NULL,
   PRIMARY KEY (`idComment`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=60 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -538,6 +427,20 @@ CREATE TABLE IF NOT EXISTS `group` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `metadata`
+--
+
+CREATE TABLE IF NOT EXISTS `metadata` (
+  `idMetadata` int(11) NOT NULL AUTO_INCREMENT,
+  `idGame` int(11) NOT NULL,
+  `keyMeta` varchar(255) NOT NULL,
+  `valueMeta` varchar(255) NOT NULL,
+  PRIMARY KEY (`idMetadata`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `perfomance`
 --
 
@@ -586,35 +489,6 @@ CREATE TABLE IF NOT EXISTS `proficiency` (
   PRIMARY KEY (`idProficiency`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
---
--- Volcado de datos para la tabla `proficiency`
---
-
-INSERT INTO `proficiency` (`idProficiency`, `nameProficiency`) VALUES
-(1, 'Mathematics'),
-(2, 'Biology'),
-(3, 'Physics'),
-(4, 'Geology'),
-(5, 'Catalan lang.'),
-(6, 'Spanish lang.'),
-(7, 'English lang.'),
-(8, 'French lang.'),
-(9, 'German lang.'),
-(10, 'European lang.'),
-(11, 'Other lang.'),
-(12, 'Laws'),
-(13, 'Economics'),
-(14, 'Literature'),
-(15, 'Social sciences'),
-(16, 'Prehistory'),
-(17, 'Ancient hist.'),
-(18, 'Postclassical hist.'),
-(19, 'Modern hist.'),
-(20, 'Contemporany hist.'),
-(21, 'Spatial vision'),
-(22, 'Reflexes'),
-(23, 'Memory');
-
 -- --------------------------------------------------------
 
 --
@@ -648,18 +522,15 @@ CREATE TABLE IF NOT EXISTS `session` (
   `campusSession` varchar(250) NOT NULL,
   PRIMARY KEY (`idSession`),
   KEY `Session_User` (`idUser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Volcado de datos para la tabla `session`
 --
 
 INSERT INTO `session` (`idSession`, `idUser`, `startTime`, `campusSession`) VALUES
-(1, 1, '2013-11-10 11:54:01', 'a08c0690979523710d969cb84c1e0ed9fc78e25b'),
-(2, 2, '2013-11-11 15:00:42', '06e677a2161dac3f0c169d3b1e1828f63909f94f'),
-(3, 3, '2013-11-12 20:58:50', '5abbfd95970b07eb150de0acd1848a2b7337e299'),
-(4, 4, '2013-11-28 16:57:26', '7e44a895714748ccac66a941e51ab0188f04668e'),
-(5, 5, '2014-05-05 18:21:51', '5b133dd9a39630e1387c92d9d9f080bb12011bf0');
+(6, 5, '2014-05-06 16:31:43', '2bba328408534caa18a1cc5738fabdd79b1437fe'),
+(7, 6, '2014-05-06 16:32:10', '35475d2a793d3d64b4f7524f67ae0c8e35ab6c11');
 
 -- --------------------------------------------------------
 
@@ -695,7 +566,21 @@ CREATE TABLE IF NOT EXISTS `tag` (
   `idGame` int(11) NOT NULL,
   `tag` varchar(255) NOT NULL,
   PRIMARY KEY (`idTag`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+
+--
+-- Volcado de datos para la tabla `tag`
+--
+
+INSERT INTO `tag` (`idTag`, `idGame`, `tag`) VALUES
+(1, 67, 'tag1'),
+(2, 68, 'tag1'),
+(3, 67, 'tag2'),
+(4, 68, 'tag2'),
+(5, 67, 'tag4'),
+(6, 69, 'tag4'),
+(7, 67, 'tag5'),
+(8, 69, 'tag4');
 
 -- --------------------------------------------------------
 
@@ -719,18 +604,14 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(45) DEFAULT NULL,
   `secret` varchar(120) DEFAULT NULL,
   PRIMARY KEY (`idUser`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Volcado de datos para la tabla `user`
 --
 
 INSERT INTO `user` (`idUser`, `login`, `password`, `secret`) VALUES
-(1, 'elggu', '', 'USER.e1076baedbc2a7370076af7e8d097addf3baca04'),
-(2, 'joan', '', 'USER.ef6b59282533016cfd60e1377b1cd8f3925c390d'),
-(3, 'josep', '', 'USER.3f7e19793565e507cec05d863aa43baf540218bb'),
-(4, 'toni', '', 'USER.2358fa8d4f214fcb53eceda9dac5be81cf9a2e99'),
-(5, 'admin', '', 'USER.d354305d01659da6c74e9bb0d90870cb8c2ee028');
+(6, 'admin', '', 'USER.bf74f70f60e7894ec18de5388026bed5b1fa5e09');
 
 -- --------------------------------------------------------
 
@@ -745,22 +626,6 @@ CREATE TABLE IF NOT EXISTS `userability` (
   `levelAbility` tinyint(4) NOT NULL,
   PRIMARY KEY (`idUserAbility`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
-
---
--- Volcado de datos para la tabla `userability`
---
-
-INSERT INTO `userability` (`idUserAbility`, `idUser`, `idAbility`, `levelAbility`) VALUES
-(1, 1, 1, 4),
-(2, 1, 2, 3),
-(3, 1, 3, 3),
-(4, 1, 4, 2),
-(5, 1, 5, 3),
-(6, 2, 1, 3),
-(7, 2, 2, 3),
-(8, 2, 5, 4),
-(9, 3, 1, 4),
-(10, 3, 4, 3);
 
 -- --------------------------------------------------------
 
@@ -777,29 +642,6 @@ CREATE TABLE IF NOT EXISTS `useraward` (
   KEY `Award` (`idAward`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Volcado de datos para la tabla `useraward`
---
-
-INSERT INTO `useraward` (`idUser`, `idAward`, `levelAward`) VALUES
-(1, 2, 2),
-(1, 5, 3),
-(1, 16, 3),
-(1, 20, 3),
-(1, 21, 3),
-(1, 23, 4),
-(1, 26, 3),
-(1, 35, 2),
-(2, 9, 4),
-(2, 22, 3),
-(2, 26, 3),
-(2, 30, 3),
-(2, 44, 3),
-(3, 12, 3),
-(3, 14, 3),
-(3, 22, 3),
-(3, 46, 4);
-
 -- --------------------------------------------------------
 
 --
@@ -813,25 +655,6 @@ CREATE TABLE IF NOT EXISTS `userbadge` (
   `dateAchiev` date NOT NULL,
   PRIMARY KEY (`idUserBadge`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
-
---
--- Volcado de datos para la tabla `userbadge`
---
-
-INSERT INTO `userbadge` (`idUserBadge`, `idUser`, `idBadge`, `dateAchiev`) VALUES
-(1, 1, 1, '2013-09-08'),
-(2, 1, 2, '2013-09-10'),
-(3, 1, 3, '2013-07-20'),
-(4, 1, 4, '2013-08-28'),
-(5, 1, 5, '2013-08-28'),
-(6, 2, 1, '2013-07-01'),
-(7, 2, 2, '2013-07-15'),
-(8, 2, 3, '2013-08-25'),
-(9, 3, 1, '2013-07-20'),
-(10, 3, 3, '2013-07-24'),
-(11, 3, 4, '2013-08-14'),
-(12, 3, 5, '2013-08-28'),
-(13, 4, 5, '2013-07-29');
 
 -- --------------------------------------------------------
 
@@ -880,11 +703,7 @@ CREATE TABLE IF NOT EXISTS `userrealm` (
 --
 
 INSERT INTO `userrealm` (`idUser`, `idRealm`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(5, 1);
+(6, 1);
 
 -- --------------------------------------------------------
 
