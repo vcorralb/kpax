@@ -27,6 +27,7 @@ import uoc.edu.svrKpax.bussines.GameScoreBO;
 import uoc.edu.svrKpax.bussines.TagBO;
 import uoc.edu.svrKpax.bussines.PlatformBO;
 import uoc.edu.svrKpax.bussines.SkillBO;
+import uoc.edu.svrKpax.bussines.MetaDataBO;
 import uoc.edu.svrKpax.util.AES;
 import uoc.edu.svrKpax.vo.Category;
 import uoc.edu.svrKpax.vo.Comment;
@@ -36,6 +37,7 @@ import uoc.edu.svrKpax.vo.Score;
 import uoc.edu.svrKpax.vo.Tag;
 import uoc.edu.svrKpax.vo.Platform;
 import uoc.edu.svrKpax.vo.Skill;
+import uoc.edu.svrKpax.vo.MetaData;
 
 import com.sun.jersey.spi.inject.Inject;
 
@@ -61,6 +63,8 @@ public class Games {
 	private PlatformBO platBo;
 	@Inject
 	private SkillBO skillBo;
+	@Inject
+	private MetaDataBO mBo;
 	
 
 	/* GAMES */
@@ -305,7 +309,39 @@ public class Games {
 		return skillBo.getSkill(campusSession, idSkill);
 	}
 	
+	/* metadatas */
+	@GET
+	@Path("/metadata/{param}/list/{id}")
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public List<MetaData> getMetaDatasGame (@PathParam("param") String campusSession, @PathParam("id") int idGame){
+		return mBo.listMetaDatasGame(campusSession, idGame);
+	}
 	
+	@POST
+	@Path("/metadata/{id}/addDel")
+	public String addDelMetaDatasGame(@FormParam("secretSession") String campusSession,@PathParam("id") int idGame,@FormParam("keys") String keysCommaSeparated,@FormParam("values") String valuesCommaSeparated){
+		String [] keysSplit = keysCommaSeparated.split(",");
+		String [] valuesSplit = valuesCommaSeparated.split(",");
+		List<MetaData> metaDatas = new ArrayList<MetaData>();
+		String valueValue = new String();
+		int i=0;
+		for(String keyValue : keysSplit)
+		{		
+			keyValue = keyValue.trim();
+			valueValue = valuesSplit[i];
+			i++;
+			if(keyValue.equals(""))
+				continue;
+			MetaData metaData = new MetaData();
+			metaData.setKeyMeta(keyValue);
+			metaData.setValueMeta(valueValue);
+			metaDatas.add(metaData);
+		}
+		if(mBo.addMetaDatasGame(campusSession, idGame, metaDatas))
+			return "OK";
+		else
+			return "ERROR";
+	}	
 	
 	public void setgBo(GameBO gBo) {
 		this.gBo = gBo;
@@ -367,6 +403,15 @@ public class Games {
 
 	public void setComBo(CommentBO comBo) {
 		this.comBo = comBo;
+	}
+	
+	public MetaDataBO getmBo() {
+		return mBo;
+	}
+
+
+	public void setmBo(MetaDataBO mBo) {
+		this.mBo = mBo;
 	}
 
 }

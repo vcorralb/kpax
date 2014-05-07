@@ -1,0 +1,16 @@
+package uoc.edu.svrKpax.bussines;
+
+import java.util.List;
+
+import uoc.edu.svrKpax.vo.MetaData;
+
+public interface MetaDataBO {
+
+	public List<MetaData> listMetaDatasGame(String campusSession, int idGame);
+
+	public Boolean addMetaDatasGame(String campusSession, int idGame,
+			List<MetaData> metaDatas);
+
+	public Boolean delMetaDatasGame(String campusSession, int idGame);
+
+}

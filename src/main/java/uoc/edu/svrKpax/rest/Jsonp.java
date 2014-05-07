@@ -1,7 +1,7 @@
 package uoc.edu.svrKpax.rest;
 
+import java.util.ArrayList;
 import java.util.List;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -27,6 +27,7 @@ import uoc.edu.svrKpax.bussines.GameScoreBO;
 import uoc.edu.svrKpax.bussines.TagBO;
 import uoc.edu.svrKpax.bussines.PlatformBO;
 import uoc.edu.svrKpax.bussines.SkillBO;
+import uoc.edu.svrKpax.bussines.MetaDataBO;
 
 import com.sun.jersey.api.json.JSONWithPadding;
 import com.sun.jersey.spi.inject.Inject;
@@ -53,7 +54,8 @@ public class Jsonp {
 	private PlatformBO platBo;
 	@Inject
 	private SkillBO skillBo;
-
+	@Inject
+	private MetaDataBO mBo;
 	
 	/* GAMES */
 	/*@GET
@@ -228,6 +230,15 @@ public class Jsonp {
 		return new JSONWithPadding(skillBo.getSkill(campusSession, idSkill),callback);
 	}
 	
+	/* metadatas */
+	@GET
+	@Path("/metadata/{param}/list/{id}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces("application/x-javascript")
+	public JSONWithPadding getMetaDatasGame (@PathParam("param") String campusSession, @PathParam("id") int idGame, @QueryParam("jsoncallback") String callback){
+		return new JSONWithPadding(mBo.listMetaDatasGame(campusSession, idGame), callback);
+	}
+	
 	public void setgBo(GameBO gBo) {
 		this.gBo = gBo;
 	}
@@ -282,6 +293,14 @@ public class Jsonp {
 
 	public void setCatBo(CategoryBO catBo) {
 		this.catBo = catBo;
+	}
+	
+	public MetaDataBO getmBo() {
+		return mBo;
+	}
+
+	public void setmBo(MetaDataBO mBo) {
+		this.mBo = mBo;
 	}
 
 }

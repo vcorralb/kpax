@@ -80,6 +80,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="mDao" class="uoc.edu.svrKpax.dao.MetaDataDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	<!-- END GAME -->
 	<!-- END DAOS -->
 
@@ -151,6 +154,12 @@
 	<bean id="skillBo" class="uoc.edu.svrKpax.bussines.SkillBOImp">
 		<property name="sBo" ref="sBo" />
 		<property name="skillDao" ref="skillDao" />
+	</bean>
+	
+	<bean id="mBo" class="uoc.edu.svrKpax.bussines.MetaDataBOImp">
+		<property name="sBo" ref="sBo" />
+		<property name="gDao" ref="gDao" />
+		<property name="mDao" ref="mDao" />
 	</bean>
 	<!-- END GAME -->
 	<!-- END BUSSINES -->

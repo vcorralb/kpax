@@ -27,6 +27,7 @@ public class Game implements Serializable {
 	private Date dateCreation;
 	private int idPlatform;
 	private int idSkill;
+	private String descripGame;
 
 	@Id
 	@Column(name = "idGame")
@@ -108,6 +109,15 @@ public class Game implements Serializable {
 
 	public void setIdSkill(int idSkill) {
 		this.idSkill = idSkill;
+	}
+	
+	@Column(name = "descripGame")
+	public String getDescripGame() {
+		return descripGame;
+	}
+
+	public void setDescripGame(String descripGame) {
+		this.descripGame = descripGame;
 	}
 	
 }

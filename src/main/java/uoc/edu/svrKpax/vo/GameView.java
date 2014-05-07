@@ -29,7 +29,10 @@ public class GameView implements Serializable {
 	private int popularity;
 	private int timesPlayed;
 	private int activity;
-
+	private int idPlatform;
+	private int idSkill;
+	private String descripGame;
+	
 	@Id
 	@Column(name = "idGame")
 	public int getIdGame() {
@@ -125,6 +128,33 @@ public class GameView implements Serializable {
 	public void setActivity(int activity) {
 		this.activity = activity;
 	}
+
+	@Column(name = "idPlatform", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
+	public int getIdPlatform() {
+		return idPlatform;
+	}
+
+	public void setIdPlatform(int idPlatform) {
+		this.idPlatform = idPlatform;
+	}
+	
+	@Column(name = "idSkill", nullable = true) //Set a "nullable=true" property only for installing on production environment. In normal case it should never be null.
+	public int getIdSkill() {
+		return idSkill;
+	}
+
+	public void setIdSkill(int idSkill) {
+		this.idSkill = idSkill;
+	}
+	
+	@Column(name = "descripGame")
+	public String getDescripGame() {
+		return descripGame;
+	}
+
+	public void setDescripGame(String descripGame) {
+		this.descripGame = descripGame;
+	}
 	
 	public static Game getGame(GameView gameView)
 	{
@@ -136,6 +166,9 @@ public class GameView implements Serializable {
 		game.setPrivateKey(gameView.privateKey);
 		game.setPublicAcces(gameView.publicAcces);
 		game.setSecretGame(gameView.secretGame);
+		game.setIdPlatform(gameView.idPlatform);
+		game.setIdSkill(gameView.idSkill);
+		game.setDescripGame(gameView.descripGame);
 		
 		return game;
 	}
