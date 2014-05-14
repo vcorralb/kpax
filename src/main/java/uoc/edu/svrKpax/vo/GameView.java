@@ -32,6 +32,7 @@ public class GameView implements Serializable {
 	private int idPlatform;
 	private int idSkill;
 	private String descripGame;
+	private String urlImage;
 	
 	@Id
 	@Column(name = "idGame")
@@ -155,6 +156,15 @@ public class GameView implements Serializable {
 	public void setDescripGame(String descripGame) {
 		this.descripGame = descripGame;
 	}
+
+	@Column(name = "urlImage")
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}
 	
 	public static Game getGame(GameView gameView)
 	{
@@ -169,6 +179,7 @@ public class GameView implements Serializable {
 		game.setIdPlatform(gameView.idPlatform);
 		game.setIdSkill(gameView.idSkill);
 		game.setDescripGame(gameView.descripGame);
+		game.setUrlImage(gameView.urlImage);
 		
 		return game;
 	}

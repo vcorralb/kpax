@@ -6,6 +6,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.OneToMany;
@@ -32,6 +33,7 @@ public class Game implements Serializable {
 	private int idPlatform;
 	private int idSkill;
 	private String descripGame;
+	private String urlImage;
 
 	private List<Tag> tags;
 	private List<MetaData> metadatas;
@@ -127,7 +129,16 @@ public class Game implements Serializable {
 		this.descripGame = descripGame;
 	}
 	
-	@OneToMany(mappedBy = "game")
+	@Column(name = "urlImage")
+	public String getUrlImage() {
+		return urlImage;
+	}
+
+	public void setUrlImage(String urlImage) {
+		this.urlImage = urlImage;
+	}	
+	
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
 	@IndexColumn(name="idTag")
 	public List<Tag> getTags() {
 	    return tags;
@@ -137,7 +148,7 @@ public class Game implements Serializable {
 	    this.tags = tags;
 	}
 	
-	@OneToMany(mappedBy = "game")
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
 	@IndexColumn(name="idMetadata")
 	public List<MetaData> getMetadatas() {
 	    return metadatas;

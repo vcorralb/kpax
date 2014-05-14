@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-05-2014 a las 18:43:42
+-- Tiempo de generación: 14-05-2014 a las 16:36:41
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.3.13
 
@@ -304,6 +304,7 @@ CREATE TABLE IF NOT EXISTS `game` (
   `idPlatform` int(11) DEFAULT '0',
   `idSkill` int(11) DEFAULT '0',
   `idCategory` int(11) DEFAULT '0',
+  `urlImage` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idGame`),
   KEY `User` (`idDeveloper`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=94 ;
@@ -312,17 +313,17 @@ CREATE TABLE IF NOT EXISTS `game` (
 -- Volcado de datos para la tabla `game`
 --
 
-INSERT INTO `game` (`idGame`, `name`, `grantPublicAccess`, `secretGame`, `privateKey`, `idDeveloper`, `dateCreation`, `descripGame`, `idPlatform`, `idSkill`, `idCategory`) VALUES
-(67, 'Aquest sí que és el primer del Josep', 1, 'GAME.45505f20ce800925b7cfb5fde1137d9f89d4c676', '8272d7a78f51059207794deefa6e6712a409c1af', NULL, NULL, 'descrip primer joc Josep', 3, 4, 3),
-(68, 'Primer joc del Joan', 1, 'GAME.d1d0deec2a5a80e6432c028e287943bb77999cdd', 'c4862fd236381fe32db7f1f21c44f6b0bf2d4c8b', NULL, NULL, NULL, 3, 3, 4),
-(69, 'Segon joc del Joan', 1, 'GAME.e5223512791180057bf0459abfb02288e95cf9e1', '8e5b48430cc05d234e8b7d192673272f1d37ee92', NULL, NULL, NULL, 0, 3, 3),
-(87, 'Segon joc del Josep', 1, 'GAME.3d0ef5678f94c4ec5a15d0d9d8a520e826a7936a', '3935f2801b7e03d280a72ed9b180c70b5f4f36a6', NULL, NULL, NULL, 5, 0, 0),
-(88, 'Tercer joc del Josep', 1, 'GAME.6f7e07c2a216ab6ab2d1c5c46d5a451caf287885', 'eb7cc87beb55b40fdde153c9ef49992c2d554ef5', NULL, NULL, NULL, 0, 5, 5),
-(89, 'Primer joc del Toni', 1, 'GAME.3166cbcf0b5d58acdb137ec7995482b9ee8e5935', '8250043a4e1ea5b1a30f84410c6cc7714ccd3cb0', NULL, NULL, NULL, 5, 0, 4),
-(90, 'Segon joc del Toni', 1, 'GAME.f1bef218ae0388e24e0f06c3dd3381135e08e272', '1319274397ad5e04e86c26b303381aaa09d2c9e9', NULL, NULL, 'Segon joc toni descrip', 0, 0, 5),
-(91, 'Tercer joc del Toni', 1, 'GAME.a5997b65a3e4257c14c46bb884cd9d5e96d6d7a8', 'b1486569c77ee6e47c62e0adbbe9b2f1aac082e7', NULL, NULL, NULL, 0, 5, 0),
-(92, 'Primer joc de l''Elggu', 1, 'GAME.811ca89e9052aed2197962bd852a81e5d23b0d62', '9a4ee7ffe39bc1fd5a452099572ba7b636739da8', NULL, NULL, NULL, 4, 0, 0),
-(93, 'Segon joc de l''Elggu', 1, 'GAME.e81ee677de591c26bd7c16f2ff290f01bae06d85', 'ea1458f347f3ec2c47c96d5fb29b366fad3afa04', NULL, NULL, NULL, 4, 4, 0);
+INSERT INTO `game` (`idGame`, `name`, `grantPublicAccess`, `secretGame`, `privateKey`, `idDeveloper`, `dateCreation`, `descripGame`, `idPlatform`, `idSkill`, `idCategory`, `urlImage`) VALUES
+(67, 'Aquest sí que és el primer del Josep', 1, 'GAME.45505f20ce800925b7cfb5fde1137d9f89d4c676', '8272d7a78f51059207794deefa6e6712a409c1af', NULL, NULL, 'descrip primer joc Josep', 3, 4, 3, 'http://localhost/prova'),
+(68, 'Primer joc del Joan', 1, 'GAME.d1d0deec2a5a80e6432c028e287943bb77999cdd', 'c4862fd236381fe32db7f1f21c44f6b0bf2d4c8b', NULL, NULL, NULL, 3, 3, 4, 'http://localhost/prova2'),
+(69, 'Segon joc del Joan', 1, 'GAME.e5223512791180057bf0459abfb02288e95cf9e1', '8e5b48430cc05d234e8b7d192673272f1d37ee92', NULL, NULL, NULL, 0, 3, 3, NULL),
+(87, 'Segon joc del Josep', 1, 'GAME.3d0ef5678f94c4ec5a15d0d9d8a520e826a7936a', '3935f2801b7e03d280a72ed9b180c70b5f4f36a6', NULL, NULL, NULL, 5, 0, 0, NULL),
+(88, 'Tercer joc del Josep', 1, 'GAME.6f7e07c2a216ab6ab2d1c5c46d5a451caf287885', 'eb7cc87beb55b40fdde153c9ef49992c2d554ef5', NULL, NULL, NULL, 0, 5, 5, NULL),
+(89, 'Primer joc del Toni', 1, 'GAME.3166cbcf0b5d58acdb137ec7995482b9ee8e5935', '8250043a4e1ea5b1a30f84410c6cc7714ccd3cb0', NULL, NULL, NULL, 5, 0, 4, NULL),
+(90, 'Segon joc del Toni', 1, 'GAME.f1bef218ae0388e24e0f06c3dd3381135e08e272', '1319274397ad5e04e86c26b303381aaa09d2c9e9', NULL, NULL, 'Segon joc toni descrip', 0, 0, 5, NULL),
+(91, 'Tercer joc del Toni', 1, 'GAME.a5997b65a3e4257c14c46bb884cd9d5e96d6d7a8', 'b1486569c77ee6e47c62e0adbbe9b2f1aac082e7', NULL, NULL, NULL, 0, 5, 0, NULL),
+(92, 'Primer joc de l''Elggu', 1, 'GAME.811ca89e9052aed2197962bd852a81e5d23b0d62', '9a4ee7ffe39bc1fd5a452099572ba7b636739da8', NULL, NULL, NULL, 4, 0, 0, NULL),
+(93, 'Segon joc de l''Elggu', 1, 'GAME.e81ee677de591c26bd7c16f2ff290f01bae06d85', 'ea1458f347f3ec2c47c96d5fb29b366fad3afa04', NULL, NULL, NULL, 4, 4, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -408,6 +409,7 @@ CREATE TABLE IF NOT EXISTS `gameview` (
 ,`idSkill` int(11)
 ,`idPlatform` int(11)
 ,`descripGame` varchar(255)
+,`urlImage` varchar(500)
 ,`timesCommented` bigint(21)
 ,`popularity` bigint(21)
 ,`timesPlayed` bigint(21)
@@ -736,7 +738,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `gameview`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gameview` AS select `game`.`idGame` AS `idGame`,`game`.`name` AS `name`,`game`.`grantPublicAccess` AS `grantPublicAccess`,`game`.`secretGame` AS `secretGame`,`game`.`privateKey` AS `privateKey`,`game`.`idCategory` AS `idCategory`,`game`.`dateCreation` AS `dateCreation`,`game`.`idSkill` AS `idSkill`,`game`.`idPlatform` AS `idPlatform`,`game`.`descripGame` AS `descripGame`,(select count(`comment`.`idComment`) from `comment` where (`comment`.`idGame` = `game`.`idGame`)) AS `timesCommented`,(select count(`gamelike`.`likeId`) from `gamelike` where (`gamelike`.`gameId` = `game`.`idGame`)) AS `popularity`,(select count(`gamescore`.`idScore`) from `gamescore` where (`gamescore`.`idGame` = `game`.`idGame`)) AS `timesPlayed`,(select count(`gameinstance`.`idGameInstance`) from `gameinstance` where ((`gameinstance`.`idGame` = `game`.`idGame`) and (`gameinstance`.`state` = 'INIT'))) AS `activity` from `game`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `gameview` AS select `game`.`idGame` AS `idGame`,`game`.`name` AS `name`,`game`.`grantPublicAccess` AS `grantPublicAccess`,`game`.`secretGame` AS `secretGame`,`game`.`privateKey` AS `privateKey`,`game`.`idCategory` AS `idCategory`,`game`.`dateCreation` AS `dateCreation`,`game`.`idSkill` AS `idSkill`,`game`.`idPlatform` AS `idPlatform`,`game`.`descripGame` AS `descripGame`,`game`.`urlImage` AS `urlImage`,(select count(`comment`.`idComment`) from `comment` where (`comment`.`idGame` = `game`.`idGame`)) AS `timesCommented`,(select count(`gamelike`.`likeId`) from `gamelike` where (`gamelike`.`gameId` = `game`.`idGame`)) AS `popularity`,(select count(`gamescore`.`idScore`) from `gamescore` where (`gamescore`.`idGame` = `game`.`idGame`)) AS `timesPlayed`,(select count(`gameinstance`.`idGameInstance`) from `gameinstance` where ((`gameinstance`.`idGame` = `game`.`idGame`) and (`gameinstance`.`state` = 'INIT'))) AS `activity` from `game`;
 
 -- --------------------------------------------------------
 
