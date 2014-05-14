@@ -317,6 +317,13 @@ public class Games {
 		return mBo.listMetaDatasGame(campusSession, idGame);
 	}
 	
+	@GET
+	@Path("/metadata/{param}/list")
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public List<MetaData> getMetaDatas (@PathParam("param") String campusSession){
+		return mBo.listMetaDatas(campusSession);
+	}
+	
 	@POST
 	@Path("/metadata/{id}/addDel")
 	public String addDelMetaDatasGame(@FormParam("secretSession") String campusSession,@PathParam("id") int idGame,@FormParam("keys") String keysCommaSeparated,@FormParam("values") String valuesCommaSeparated){

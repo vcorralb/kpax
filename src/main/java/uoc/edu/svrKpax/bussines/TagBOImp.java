@@ -47,7 +47,7 @@ public class TagBOImp implements TagBO {
 					for(Tag tag : tags)
 					{
 						Tag objTag = new Tag();
-						objTag.setIdGame(idGame);
+						objTag.setGame(objGame);
 						objTag.setTag(tag.getTag());
 	
 						tDao.addTagGame(objTag);

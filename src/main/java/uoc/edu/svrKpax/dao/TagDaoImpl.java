@@ -1,12 +1,17 @@
 package uoc.edu.svrKpax.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.Tag;
 
 public class TagDaoImpl extends HibernateDaoSupport implements TagDao {
@@ -14,7 +19,14 @@ public class TagDaoImpl extends HibernateDaoSupport implements TagDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tag> getAllTagsGame(int idGame) {
-		return getHibernateTemplate().find("from Tag as tag where tag.idGame = "+idGame);
+		List<Tag> list = new ArrayList<Tag>();
+		
+		Criteria criteria = getSession().createCriteria(Tag.class, "tag");
+		criteria.createAlias("tag.game", "game");
+		criteria.add(Restrictions.eq("game.idGame", idGame));
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = criteria.list();
+        return list;
 	}
 
 	@Override

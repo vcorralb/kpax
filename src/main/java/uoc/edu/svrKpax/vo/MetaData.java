@@ -4,9 +4,16 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.codehaus.jackson.annotate.JsonIgnore;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @XmlRootElement
 @Entity
@@ -18,9 +25,11 @@ public class MetaData implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int idMetadata;
-	private int idGame;
+	//private int idGame;
 	private String keyMeta;
 	private String valueMeta;
+
+	private Game game;
 
 	@Id
 	@Column(name = "idMetadata")
@@ -32,14 +41,14 @@ public class MetaData implements Serializable {
 		this.idMetadata = idMetadata;
 	}
 
-	@Column(name = "idGame")
+	/*@Column(name = "idGame")
 	public int getIdGame() {
 		return idGame;
 	}
 
 	public void setIdGame(int idGame) {
 		this.idGame = idGame;
-	}
+	}*/
 	
 	@Column(name = "keyMeta")
 	public String getKeyMeta() {
@@ -57,5 +66,17 @@ public class MetaData implements Serializable {
 
 	public void setValueMeta(String valueMeta) {
 		this.valueMeta = valueMeta;
+	}
+	
+	@Fetch(FetchMode.JOIN) 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "idGame")
+	@JsonIgnore
+	public Game getGame() {
+	    return this.game;
+	}
+
+	public void setGame(Game game) {
+	    this.game = game;
 	}
 }

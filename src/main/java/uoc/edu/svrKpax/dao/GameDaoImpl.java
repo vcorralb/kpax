@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -69,13 +70,19 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
     
 	@Override
 	public List<Game> getGamesSearch(String text) {		
-		Criteria criteria = getSession().createCriteria(Game.class);
+		Criteria criteria = getSession().createCriteria(Game.class, "game");
+		criteria.createAlias("game.tags", "tag", Criteria.LEFT_JOIN);
+		criteria.createAlias("game.metadatas", "metadata", Criteria.LEFT_JOIN);
+
 		// cerquem
 		String wName = text.split("#_#")[0];
 		String wCategory = text.split("#_#")[1];
 		String wPlatform = text.split("#_#")[2];
 		String wSkill = text.split("#_#")[3];
-		String wSort = text.split("#_#")[4];
+		String wTag = text.split("#_#")[4];
+		String wKeyMeta = text.split("#_#")[5];
+		String wValueMeta = text.split("#_#")[6];
+		String wSort = text.split("#_#")[7];
 				
 		List<Game> list = new ArrayList<Game>();
 		
@@ -87,6 +94,14 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 			criteria.add(Restrictions.eq("idPlatform", new Integer(wPlatform)));
 		if(!"0".equals(wSkill))
 			criteria.add(Restrictions.eq("idSkill", new Integer(wSkill)));
+		if(wTag.trim().length() > 0) {
+			criteria.add(Restrictions.like("tag.tag", "%"+wTag+"%"));
+		}
+		if((!"0".equals(wKeyMeta)) && (wValueMeta.trim().length() > 0)){
+			criteria.add(Restrictions.eq("metadata.keyMeta", wKeyMeta));
+			criteria.add(Restrictions.like("metadata.valueMeta", "%"+wValueMeta+"%"));
+		}
+		
 		
 		if("1".equals(wSort)) {
 			criteria.addOrder(Order.asc("name"));
@@ -101,6 +116,7 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 			criteria.addOrder(Order.asc("idSkill"));
 		}
 		
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = criteria.list();
         return list;
 	}

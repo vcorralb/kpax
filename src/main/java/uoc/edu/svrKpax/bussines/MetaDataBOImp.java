@@ -27,6 +27,14 @@ public class MetaDataBOImp implements MetaDataBO {
 	}
 
 	@Override
+	public List<MetaData> listMetaDatas(String campusSession) {
+		if (sBo.validateSession(campusSession) != null) {
+			return mDao.getAllMetaDatas();
+		}
+		return null;
+	}
+	
+	@Override
 	public Boolean addMetaDatasGame(String campusSession, int idGame,
 			List<MetaData> metaDatas) {
 		try {
@@ -47,7 +55,7 @@ public class MetaDataBOImp implements MetaDataBO {
 					for(MetaData metaData : metaDatas)
 					{
 						MetaData objMetaData = new MetaData();
-						objMetaData.setIdGame(idGame);
+						objMetaData.setGame(objGame);
 						objMetaData.setKeyMeta(metaData.getKeyMeta());
 						objMetaData.setValueMeta(metaData.getValueMeta());
 	

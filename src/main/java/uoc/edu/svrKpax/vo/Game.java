@@ -1,5 +1,6 @@
 package uoc.edu.svrKpax.vo;
 
+import java.util.List;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +8,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import org.hibernate.annotations.IndexColumn;
 
 @XmlRootElement
 @Entity
@@ -29,6 +33,9 @@ public class Game implements Serializable {
 	private int idSkill;
 	private String descripGame;
 
+	private List<Tag> tags;
+	private List<MetaData> metadatas;
+	
 	@Id
 	@Column(name = "idGame")
 	public int getIdGame() {
@@ -120,4 +127,23 @@ public class Game implements Serializable {
 		this.descripGame = descripGame;
 	}
 	
+	@OneToMany(mappedBy = "game")
+	@IndexColumn(name="idTag")
+	public List<Tag> getTags() {
+	    return tags;
+	}
+	
+	public void setTags(List<Tag> tags) {
+	    this.tags = tags;
+	}
+	
+	@OneToMany(mappedBy = "game")
+	@IndexColumn(name="idMetadata")
+	public List<MetaData> getMetadatas() {
+	    return metadatas;
+	}
+	
+	public void setMetadatas(List<MetaData> metadatas) {
+	    this.metadatas = metadatas;
+	}
 }

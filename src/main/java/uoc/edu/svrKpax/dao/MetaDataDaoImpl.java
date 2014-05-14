@@ -1,22 +1,45 @@
 package uoc.edu.svrKpax.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
+import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.MetaData;
+import uoc.edu.svrKpax.vo.Tag;
 
 public class MetaDataDaoImpl extends HibernateDaoSupport implements MetaDataDao {
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<MetaData> getAllMetaDatasGame(int idGame) {
-		return getHibernateTemplate().find("from MetaData as metadata where metadata.idGame = "+idGame);
+		List<MetaData> list = new ArrayList<MetaData>();
+		
+		Criteria criteria = getSession().createCriteria(MetaData.class, "metadata");
+		criteria.createAlias("metadata.game", "game");
+		criteria.add(Restrictions.eq("game.idGame", idGame));
+		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
+		list = criteria.list();
+        return list;
 	}
 
+	@Override
+	public List<MetaData> getAllMetaDatas() {
+		Criteria criteria = getSession().createCriteria(MetaData.class);
+		criteria.setProjection(Projections.distinct(Projections.property("keyMeta")));
+		List<MetaData> list = criteria.list();
+        return list;
+	}
+	
 	@Override
 	public MetaData getMetaData(int idMetaData) {
 		DetachedCriteria criteria = DetachedCriteria.forClass(MetaData.class);
