@@ -210,6 +210,15 @@ public class GameBOImp implements GameBO {
 		return null;
 	}
 	
+	@Override
+	public List<Game> listSimilarGames(String campusSession, String idGame){
+		if (sBo.validateSession(campusSession) != null) {
+			return gDao.getSimilarGames(idGame);
+		}
+
+		return null;
+	}
+	
 	public void setgDao(GameDao gDao) {
 		this.gDao = gDao;
 	}

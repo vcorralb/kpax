@@ -146,6 +146,14 @@ public class Games {
 		return gBo.listGamesSearch(campusSession, text);
 	}
 	
+	@GET
+	@Path("/{session}/listsimilar/{id}")
+	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
+	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
+	public List<Game> getSimilarGames(@PathParam("session") String campusSession, @PathParam("id") String text) throws UnsupportedEncodingException {
+		return gBo.listSimilarGames(campusSession, text);
+	}
+	
 	/* categories */
 	@GET
 	@Path("/category/{param}/list")

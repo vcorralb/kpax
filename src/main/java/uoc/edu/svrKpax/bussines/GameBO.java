@@ -15,7 +15,8 @@ public interface GameBO {
 	public Boolean addGame(String campusSession, String nameGame,int idGame, int idCategory, Date dateCreation);
 	public Boolean delGame(String campusSession,int idGame);
 	public Game getGame(String idGame,String campusSession);
-	public List<Game> listGamesSearch(String campusSession, String text);	
+	public List<Game> listGamesSearch(String campusSession, String text);
+	public List<Game> listSimilarGames(String campusSession, String idGame);
 	
 }
 

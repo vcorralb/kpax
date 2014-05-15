@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
@@ -12,6 +13,7 @@ import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import uoc.edu.svrKpax.vo.Game;
+import uoc.edu.svrKpax.vo.GameView;
 
 import org.hibernate.*;
 
@@ -119,5 +121,32 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
 		list = criteria.list();
         return list;
+	}
+	
+	@Override
+	public List<Game> getSimilarGames(String idGame){
+		String HQLSQL = "select {g.*} from Game g " +
+				" inner join TotalGameSimilitudeView tgsv on g.idGame = tgsv.idGame " +
+				" where tgsv.similarToIdGame = " + idGame + " " +
+				" order by tgsv.totalSimilitude desc " +
+				" limit 2";
+		
+		try
+		{
+			org.hibernate.Session s = getSession();
+			Transaction t = s.getTransaction();
+			t.begin();
+			@SuppressWarnings("unchecked")
+			List<Game> games = s.createSQLQuery(HQLSQL)
+			.addEntity("g", Game.class).list();
+			t.commit();
+			releaseSession(s);
+			
+			return games;
+		}
+		catch(Exception e)
+		{
+			return null;
+		}
 	}
 }
