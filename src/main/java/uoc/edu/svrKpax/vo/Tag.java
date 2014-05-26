@@ -58,7 +58,7 @@ public class Tag implements Serializable {
 		this.tag = tag;
 	}
 	
-	@Fetch(FetchMode.JOIN) 
+	@Fetch(FetchMode.SELECT) 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idGame")
 	@JsonIgnore

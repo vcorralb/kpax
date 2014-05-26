@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import uoc.edu.svrKpax.vo.Game;
+import uoc.edu.svrKpax.vo.GamePagination;
 
 
 public interface GameBO {
@@ -15,7 +16,7 @@ public interface GameBO {
 	public Boolean addGame(String campusSession, String nameGame,int idGame, int idCategory, Date dateCreation);
 	public Boolean delGame(String campusSession,int idGame);
 	public Game getGame(String idGame,String campusSession);
-	public List<Game> listGamesSearch(String campusSession, String text);
+	public GamePagination listGamesSearch(String campusSession, String text, Integer offset, Integer limit);
 	public List<Game> listSimilarGames(String campusSession, String idGame);
 	
 }

@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
@@ -15,6 +14,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -33,6 +33,7 @@ import uoc.edu.svrKpax.vo.Category;
 import uoc.edu.svrKpax.vo.Comment;
 import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.GameLike;
+import uoc.edu.svrKpax.vo.GamePagination;
 import uoc.edu.svrKpax.vo.Score;
 import uoc.edu.svrKpax.vo.Tag;
 import uoc.edu.svrKpax.vo.Platform;
@@ -141,9 +142,9 @@ public class Games {
 	@Path("/{session}/list/{text}")
 	@Consumes({ MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML })
 	@Produces( { MediaType.APPLICATION_JSON ,MediaType.APPLICATION_XML})
-	public List<Game> getGamesSearch(@PathParam("session") String campusSession, @PathParam("text") String text) throws UnsupportedEncodingException {
+	public GamePagination getGamesSearch(@PathParam("session") String campusSession, @PathParam("text") String text, @QueryParam("offset") Integer offset, @QueryParam("limit") Integer limit) throws UnsupportedEncodingException {
 		text = URLDecoder.decode(text, "UTF-8");
-		return gBo.listGamesSearch(campusSession, text);
+		return gBo.listGamesSearch(campusSession, text, offset, limit);
 	}
 	
 	@GET

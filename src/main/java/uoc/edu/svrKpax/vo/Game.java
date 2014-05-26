@@ -12,6 +12,8 @@ import javax.persistence.Table;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.IndexColumn;
 
 @XmlRootElement
@@ -138,6 +140,7 @@ public class Game implements Serializable {
 		this.urlImage = urlImage;
 	}	
 	
+	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
 	@IndexColumn(name="idTag")
 	public List<Tag> getTags() {
@@ -148,6 +151,7 @@ public class Game implements Serializable {
 	    this.tags = tags;
 	}
 	
+	@Fetch(FetchMode.SELECT)
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "game")
 	@IndexColumn(name="idMetadata")
 	public List<MetaData> getMetadatas() {

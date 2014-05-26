@@ -2,6 +2,7 @@ package uoc.edu.svrKpax.dao;
 
 import java.util.List;
 
+import uoc.edu.svrKpax.util.IntegerWrapper;
 import uoc.edu.svrKpax.vo.Game;
 
 public interface GameDao {
@@ -13,6 +14,6 @@ public interface GameDao {
 	public void addGame(Game objGame);
 	public void delGame(Game objGame);
 	public List<Game> getUserGames(String username);
-	public List<Game> getGamesSearch(String text);
+	public List<Game> getGamesSearch(String text, Integer offset, Integer limit, IntegerWrapper total);
 	public List<Game> getSimilarGames(String idGame);
 }

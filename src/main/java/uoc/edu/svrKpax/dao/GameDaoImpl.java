@@ -1,5 +1,6 @@
 package uoc.edu.svrKpax.dao;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,13 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import uoc.edu.svrKpax.util.IntegerWrapper;
 import uoc.edu.svrKpax.vo.Game;
-import uoc.edu.svrKpax.vo.GameView;
 
 import org.hibernate.*;
 
@@ -71,12 +73,9 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 	}
     
 	@Override
-	public List<Game> getGamesSearch(String text) {		
-		Criteria criteria = getSession().createCriteria(Game.class, "game");
-		criteria.createAlias("game.tags", "tag", Criteria.LEFT_JOIN);
-		criteria.createAlias("game.metadatas", "metadata", Criteria.LEFT_JOIN);
-
-		// cerquem
+	public List<Game> getGamesSearch(String text, Integer offset, Integer limit, IntegerWrapper total) {
+		
+		//Extract parameters from text
 		String wName = text.split("#_#")[0];
 		String wCategory = text.split("#_#")[1];
 		String wPlatform = text.split("#_#")[2];
@@ -85,9 +84,19 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 		String wKeyMeta = text.split("#_#")[5];
 		String wValueMeta = text.split("#_#")[6];
 		String wSort = text.split("#_#")[7];
-				
+		
+		//Extract id that satisfy the filter and by order
+		Criteria criteria = getSession().createCriteria(Game.class, "game");
+		criteria.setProjection(Projections.distinct(Projections.property("idGame")));
+		criteria.createAlias("game.tags", "tag", Criteria.LEFT_JOIN);
+		criteria.createAlias("game.metadatas", "metadata", Criteria.LEFT_JOIN);
+
+
+		List<Integer> listId = new ArrayList<Integer>();
+		List<Integer> listIdPagination = new ArrayList<Integer>();
 		List<Game> list = new ArrayList<Game>();
 		
+		//Filter
 		if(wName.trim().length() > 0)
 			criteria.add(Restrictions.like("name", "%"+wName+"%"));
 		if(!"0".equals(wCategory))
@@ -103,8 +112,8 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 			criteria.add(Restrictions.eq("metadata.keyMeta", wKeyMeta));
 			criteria.add(Restrictions.like("metadata.valueMeta", "%"+wValueMeta+"%"));
 		}
-		
-		
+
+		//Order
 		if("1".equals(wSort)) {
 			criteria.addOrder(Order.asc("name"));
 		}
@@ -118,8 +127,50 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 			criteria.addOrder(Order.asc("idSkill"));
 		}
 		
+		//Distinct
 		criteria.setResultTransformer(CriteriaSpecification.DISTINCT_ROOT_ENTITY);
-		list = criteria.list();
+		
+		//List
+		listId = criteria.list();
+		
+		//Paginate
+		Integer listIdSize = listId.size();
+		total.setInteger(listIdSize);
+		
+		//If listId contain id's
+		if (listIdSize > 0) {
+		
+			if (offset + limit < listIdSize) {
+				listIdPagination = listId.subList(offset, offset + limit);
+			} else {
+				listIdPagination = listId.subList(offset, listIdSize);
+			}
+			
+			//Extract all attributes from database (filter by id and order)
+			criteria = getSession().createCriteria(Game.class, "game");
+			
+			//Filter
+			criteria.add(Restrictions.in("idGame", listIdPagination));
+			
+			//Order
+			if("1".equals(wSort)) {
+				criteria.addOrder(Order.asc("name"));
+			}
+			else if("2".equals(wSort)) {
+				criteria.addOrder(Order.asc("idCategory"));
+			}
+			else if("3".equals(wSort)) {
+				criteria.addOrder(Order.asc("idPlatform"));
+			}
+			else if("4".equals(wSort)) {
+				criteria.addOrder(Order.asc("idSkill"));
+			}
+			
+			//List
+			list = criteria.list();
+		
+		}
+		
         return list;
 	}
 	
@@ -149,4 +200,5 @@ public class GameDaoImpl extends HibernateDaoSupport implements GameDao {
 			return null;
 		}
 	}
+	
 }

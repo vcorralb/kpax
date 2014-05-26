@@ -68,7 +68,7 @@ public class MetaData implements Serializable {
 		this.valueMeta = valueMeta;
 	}
 	
-	@Fetch(FetchMode.JOIN) 
+	@Fetch(FetchMode.SELECT)
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "idGame")
 	@JsonIgnore

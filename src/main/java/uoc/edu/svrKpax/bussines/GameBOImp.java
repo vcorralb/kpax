@@ -9,9 +9,11 @@ import java.util.Map;
 import uoc.edu.svrKpax.dao.CategoryDao;
 import uoc.edu.svrKpax.dao.GameDao;
 import uoc.edu.svrKpax.dao.GameViewDao;
+import uoc.edu.svrKpax.util.IntegerWrapper;
 import uoc.edu.svrKpax.util.Security;
 import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.GameView;
+import uoc.edu.svrKpax.vo.GamePagination;
 
 public class GameBOImp implements GameBO {
 
@@ -188,7 +190,7 @@ public class GameBOImp implements GameBO {
 				objGame = gDao.getGameUid(idGame);
 			else{
 				if(sBo.validateSession(campusSession)!=null){
-					objGame = gDao.getGame(Integer.parseInt(idGame));	
+					objGame = gDao.getGame(Integer.parseInt(idGame));
 				}else{
 					return null;
 				}
@@ -202,9 +204,15 @@ public class GameBOImp implements GameBO {
 	}
 
 	@Override
-	public List<Game> listGamesSearch(String campusSession, String text) {
+	public GamePagination listGamesSearch(String campusSession, String text, Integer offset, Integer limit) {
 		if (sBo.validateSession(campusSession) != null) {
-			return gDao.getGamesSearch(text);
+			GamePagination gamepagination = new GamePagination();
+			IntegerWrapper total = new IntegerWrapper();
+			gamepagination.setGames(gDao.getGamesSearch(text, offset, limit, total));
+			gamepagination.setOffset(offset);
+			gamepagination.setLimit(limit);
+			gamepagination.setTotal(total);
+			return gamepagination;
 		}
 
 		return null;

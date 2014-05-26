@@ -1,6 +1,5 @@
 package uoc.edu.svrKpax.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
@@ -88,9 +87,9 @@ public class Jsonp {
 	@Path("game/{session}/list/{text}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces("application/x-javascript")
-	public JSONWithPadding getGamesSearchJsonp(@PathParam("session") String campusSession, @PathParam("text") String text,  @QueryParam("jsoncallback") String callback) throws UnsupportedEncodingException {	
+	public JSONWithPadding getGamesSearchJsonp(@PathParam("session") String campusSession, @PathParam("text") String text,  @QueryParam("jsoncallback") String callback, @QueryParam("offset") Integer offset, @QueryParam("limit") Integer limit) throws UnsupportedEncodingException {	
 		text = URLDecoder.decode(text, "UTF-8");
-		return new JSONWithPadding(gBo.listGamesSearch(campusSession, text), callback);
+		return new JSONWithPadding(gBo.listGamesSearch(campusSession, text, offset, limit), callback);
 	}
 	
 	/* categories */
