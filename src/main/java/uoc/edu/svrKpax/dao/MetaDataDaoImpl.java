@@ -4,18 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Criteria;
-import org.hibernate.SQLQuery;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.MetaData;
-import uoc.edu.svrKpax.vo.Tag;
 
 public class MetaDataDaoImpl extends HibernateDaoSupport implements MetaDataDao {
 

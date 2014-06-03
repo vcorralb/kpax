@@ -25,7 +25,6 @@ public class MetaData implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int idMetadata;
-	//private int idGame;
 	private String keyMeta;
 	private String valueMeta;
 
@@ -41,15 +40,6 @@ public class MetaData implements Serializable {
 		this.idMetadata = idMetadata;
 	}
 
-	/*@Column(name = "idGame")
-	public int getIdGame() {
-		return idGame;
-	}
-
-	public void setIdGame(int idGame) {
-		this.idGame = idGame;
-	}*/
-	
 	@Column(name = "keyMeta")
 	public String getKeyMeta() {
 		return keyMeta;

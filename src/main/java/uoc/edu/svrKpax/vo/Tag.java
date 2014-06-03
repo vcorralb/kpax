@@ -25,7 +25,6 @@ public class Tag implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	private int idTag;
-	//private int idGame;
 	private String tag;
 	
 	private Game game;
@@ -39,15 +38,6 @@ public class Tag implements Serializable {
 	public void setIdTag(int idTag) {
 		this.idTag = idTag;
 	}
-
-	/*@Column(name = "idGame")
-	public int getIdGame() {
-		return idGame;
-	}
-
-	public void setIdGame(int idGame) {
-		this.idGame = idGame;
-	}*/
 	
 	@Column(name = "tag")
 	public String getTag() {

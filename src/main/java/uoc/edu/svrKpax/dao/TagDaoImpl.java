@@ -6,12 +6,10 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.dao.support.DataAccessUtils;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
-import uoc.edu.svrKpax.vo.Game;
 import uoc.edu.svrKpax.vo.Tag;
 
 public class TagDaoImpl extends HibernateDaoSupport implements TagDao {
